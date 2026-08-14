@@ -93,7 +93,7 @@ COPY --from=ndk /android-sdk /android-sdk
 RUN apt-get install -y ccache strip-nondeterminism qt6-base-dev qt6-tools-dev qt6-5compat-dev qt6-svg-dev qt6-multimedia-dev qt6-speech-dev libxkbcommon-dev cmake pkg-config libusb-1.0-0-dev
 
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
-RUN mkdir /android-sdk/bin
-COPY avdmanager /android-sdk/bin
+RUN mkdir -p /android-sdk/tools/bin
+COPY avdmanager /android-sdk/tools/bin
 
 ENV ANDROID_SDK_PATH=/android-sdk ANDROID_NDK_PATH=/android-ndk ANDROID_NDK_ROOT=/android-ndk PATH=/rbtoolchain/bin:$PATH
