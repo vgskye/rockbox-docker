@@ -87,7 +87,7 @@ COPY --from=toolchain /rbtoolchain /rbtoolchain
 COPY --from=ndk /android-ndk /android-ndk
 COPY --from=ndk /android-sdk /android-sdk
 
-RUN apt-get install -y ccache strip-nondeterminism qt6-base-dev qt6-tools-dev qt6-5compat-dev qt6-svg-dev qt6-svg-dev qt6-multimedia-dev libxkbcommon-dev
+RUN apt-get install -y ccache strip-nondeterminism qt6-base-dev qt6-tools-dev qt6-5compat-dev qt6-svg-dev qt6-svg-dev qt6-multimedia-dev libxkbcommon-dev cmake pkg-config
 # qt6-base-dev qt6-tools-dev qt6-5compat-dev qt6-svg-dev qt6-svg-dev build-essential cmake pkg-config qt6-multimedia-dev libxkbcommon-dev
 
 ENV ANDROID_SDK_PATH=/android-sdk ANDROID_NDK_PATH=/android-ndk ANDROID_NDK_ROOT=/android-ndk PATH=/rbtoolchain/bin:$PATH
