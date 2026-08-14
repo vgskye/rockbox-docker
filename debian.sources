@@ -1,11 +1,11 @@
 Types: deb
 URIs: http://snapshot.debian.org/archive/debian/20260803T000000Z
-Suites: bookworm bookworm-updates
+Suites: trixie trixie-updates
 Components: main
 Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
 
 Types: deb
 URIs: http://snapshot.debian.org/archive/debian-security/20260803T000000Z
-Suites: bookworm-security
+Suites: trixie-security
 Components: main
 Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg

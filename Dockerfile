@@ -1,4 +1,4 @@
-FROM debian:bookworm-20260803@sha256:813017f3d62be4b5891a7acca6a01bdcd4b8513daa81b1ab99d3a50385b26931 AS snap
+FROM debian:trixie-20260803@sha256:34cd9e9fd437c0a095ec39cb2e73422c9f30821b0d0848ed74fd0d43bae4d958 AS snap
 
 COPY docker-snapshot /etc/apt/apt.conf.d/
 COPY debian.sources /etc/apt/sources.list.d/debian.sources
@@ -66,7 +66,10 @@ RUN cd /rockbox && ./tools/rockboxdev.sh --target=i --prefix=/rbtoolchain
 FROM base AS ndk-base
 
 RUN dpkg --add-architecture i386 && apt-get update 
-RUN apt-get -y install unzip openjdk-17-jdk build-essential zip apksigner libstdc++6:i386 libgcc1:i386 zlib1g:i386 libncurses5:i386
+RUN apt-get -y install unzip build-essential zip apksigner libstdc++6:i386 libgcc1:i386 zlib1g:i386 libncurses6:i386
+RUN wget -O /zulu17.deb https://cdn.azul.com/zulu/bin/zulu17.68.17-ca-jdk17.0.20-linux_amd64.deb
+RUN apt-get -y install /zulu17.deb
+RUN rm /zulu17.deb
 
 FROM ndk-base AS ndk
 
@@ -87,7 +90,8 @@ COPY --from=toolchain /rbtoolchain /rbtoolchain
 COPY --from=ndk /android-ndk /android-ndk
 COPY --from=ndk /android-sdk /android-sdk
 
-RUN apt-get install -y ccache strip-nondeterminism qt6-base-dev qt6-tools-dev qt6-5compat-dev qt6-svg-dev qt6-svg-dev qt6-multimedia-dev libxkbcommon-dev cmake pkg-config
-# qt6-base-dev qt6-tools-dev qt6-5compat-dev qt6-svg-dev qt6-svg-dev build-essential cmake pkg-config qt6-multimedia-dev libxkbcommon-dev
+RUN apt-get install -y ccache strip-nondeterminism qt6-base-dev qt6-tools-dev qt6-5compat-dev qt6-svg-dev qt6-multimedia-dev qt6-speech-dev libxkbcommon-dev cmake pkg-config libusb-1.0-0-dev
+
+RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
 ENV ANDROID_SDK_PATH=/android-sdk ANDROID_NDK_PATH=/android-ndk ANDROID_NDK_ROOT=/android-ndk PATH=/rbtoolchain/bin:$PATH
