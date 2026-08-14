@@ -1,0 +1,2 @@
+#!/bin/bash
+exec $ANDROID_SDK_PATH/cmdline-tools/latest/bin/avdmanager "$@"
