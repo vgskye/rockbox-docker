@@ -90,7 +90,7 @@ COPY --from=toolchain /rbtoolchain /rbtoolchain
 COPY --from=ndk /android-ndk /android-ndk
 COPY --from=ndk /android-sdk /android-sdk
 
-RUN apt-get install -y ccache strip-nondeterminism qt6-base-dev qt6-tools-dev qt6-5compat-dev qt6-svg-dev qt6-multimedia-dev qt6-speech-dev libxkbcommon-dev cmake pkg-config libusb-1.0-0-dev
+RUN apt-get install -y ccache strip-nondeterminism qt6-base-dev qt6-tools-dev qt6-5compat-dev qt6-svg-dev qt6-multimedia-dev qt6-speech-dev libxkbcommon-dev cmake pkg-config libusb-1.0-0-dev libbz2-dev
 
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 RUN mkdir -p /android-sdk/tools/bin
